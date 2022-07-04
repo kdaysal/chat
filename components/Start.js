@@ -40,8 +40,6 @@ export default class Start extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   bgImage: {
     flex: 1,
@@ -50,10 +48,9 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   titleWrapper: {
-    height: "50%",
     width: "88%",
+    height: "45%",
     alignItems: "center",
-    paddingTop: 100,
   },
   titleText: {
     fontSize: 50,
