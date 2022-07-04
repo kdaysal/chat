@@ -19,6 +19,7 @@ export default class Start extends React.Component {
             onChangeText={(name) => this.setState({ name })}
             value={this.state.name}
             placeholder='Enter your name ...'
+            placeholderTextColor="azure"
           />
           <Button
             style={styles.chatButton}
@@ -48,13 +49,12 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 70,
     color: "white",
-    height: "70%",
+    height: "30%",
     textAlign: "center",
   },
   inputText: {
     color: "white",
-    fontSize: 30,
-    lineHeight: 60,
+    fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
     justifyContent: "center",
@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
     marginLeft: "20%",
     marginRight: "20%",
     marginBottom: 15,
+    borderWidth: 1,
+    borderRadius: 1,
+    borderColor: "yellow",
+    padding: 2
   },
 
   chatButton: {
