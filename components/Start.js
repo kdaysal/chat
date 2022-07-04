@@ -26,17 +26,19 @@ export default class Start extends React.Component {
                 placeholderTextColor="blue"
               />
             </View>
-            <Button
-              style={styles.chatButton}
-              title="Go to Chat"
-              onPress={() => this.props.navigation.navigate('Chat', {
-                name: this.state.name
-              }
-              )}
-            />
+            <View style={styles.chatButtonWrapper}>
+              <Button
+                color="#FFFFFF"
+                title="Start Chatting..."
+                onPress={() => this.props.navigation.navigate('Chat', {
+                  name: this.state.name
+                }
+                )}
+              />
+            </View>
           </View>
         </ImageBackground>
-      </View>
+      </View> //end styles.container
     )
   }
 }
@@ -82,5 +84,15 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     opacity: 0.5,
     color: "#757083"
-  }
+  },
+  chatButtonWrapper: {
+    backgroundColor: "#757083",
+    width: "88%",
+    // height: 70,
+    // borderRadius: 8,
+    // backgroundColor: "#1D6085",
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+
 });
