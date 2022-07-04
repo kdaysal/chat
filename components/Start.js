@@ -31,6 +31,9 @@ export default class Start extends React.Component {
                 Choose Background Color!
               </Text>
             </View>
+
+            { /* These are the background color options presented as circular buttons */}
+            {/* With TouchableOpacit, on press down, the opacity of the wrapped view is decreased, dimming it. */}
             <View style={styles.colorPalette}>
               <TouchableOpacity
                 style={styles.color1}
