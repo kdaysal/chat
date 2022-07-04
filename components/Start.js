@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 
 import BgImage from "../assets/background-image.png";
 
@@ -30,6 +30,20 @@ export default class Start extends React.Component {
               <Text style={styles.pickColor}>
                 Choose Background Color!
               </Text>
+            </View>
+            <View style={styles.colorPalette}>
+              <TouchableOpacity
+                style={styles.color1}
+              ></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.color2}
+              ></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.color3}
+              ></TouchableOpacity>
+              <TouchableOpacity
+                style={styles.color4}
+              ></TouchableOpacity>
             </View>
             <View style={styles.chatButtonWrapper}>
               <Button
@@ -108,5 +122,37 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     color: "#757083",
     opacity: 1,
+  },
+  colorPalette: {
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+  },
+  color1: {
+    backgroundColor: "#090C08",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  color2: {
+    backgroundColor: "#474056",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  color3: {
+    backgroundColor: "#8A95A5",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  color4: {
+    backgroundColor: "B9C6AE",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderColor: "gray",
+    borderWidth: 1
   },
 });
