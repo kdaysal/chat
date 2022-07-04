@@ -76,7 +76,8 @@ export default class Start extends React.Component {
                 color="#FFFFFF"
                 title="Start Chatting..."
                 onPress={() => this.props.navigation.navigate('Chat', {
-                  name: this.state.name
+                  name: this.state.name,
+                  selectedBackgroundColor: this.state.backgroundColor
                 }
                 )}
               />
@@ -124,10 +125,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputText: {
+    height: "100%",
+    width: "100%",
     fontSize: 16,
     fontWeight: "300",
     opacity: 0.5,
-    color: "#757083"
+    color: "#757083",
+    paddingLeft: 10,
   },
   chatButtonWrapper: {
     backgroundColor: "#757083",
