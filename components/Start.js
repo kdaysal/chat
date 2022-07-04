@@ -6,7 +6,26 @@ import BgImage from "../assets/background-image.png";
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '' };
+    this.state = {
+      name: '',
+      backgroundColor: this.colors.color1
+    };
+  }
+
+  //When user clicks on a color from the color palette, update state of backgroundColor to the chosen color
+  changeBackgroundColor = (userSelectedColor) => {
+    console.log(`changeBackgroundColor is running`);
+    console.log(`before state update, backgroundColor is: ${this.state.backgroundColor}`);
+    this.setState({ backgroundColor: userSelectedColor });
+    console.log(`now state of backgroundColor is: ${this.state.backgroundColor}`);
+  }
+
+  //Define the color palette that users can choose (per the design specs). This object will be used to update the state of backgroundColor
+  colors = {
+    color1: "#090C08",
+    color2: "#474056",
+    color3: "#8A95A5",
+    color4: "#B9C6AE"
   }
 
   render() {
@@ -32,20 +51,24 @@ export default class Start extends React.Component {
               </Text>
             </View>
 
-            { /* These are the background color options presented as circular buttons */}
+            { /* These are the background color options for the chat screen that the user can choose */}
             {/* With TouchableOpacit, on press down, the opacity of the wrapped view is decreased, dimming it. */}
             <View style={styles.colorPalette}>
               <TouchableOpacity
                 style={styles.color1}
+                onPress={() => this.changeBackgroundColor(this.colors.color1)}
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color2}
+                onPress={() => this.changeBackgroundColor(this.colors.color2)}
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color3}
+                onPress={() => this.changeBackgroundColor(this.colors.color3)}
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color4}
+                onPress={() => this.changeBackgroundColor(this.colors.color4)}
               ></TouchableOpacity>
             </View>
             <View style={styles.chatButtonWrapper}>
@@ -109,16 +132,10 @@ const styles = StyleSheet.create({
   chatButtonWrapper: {
     backgroundColor: "#757083",
     width: "88%",
-    // height: 70,
-    // borderRadius: 8,
-    // backgroundColor: "#1D6085",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   pickColorWrapper: {
     marginRight: "auto",
     paddingLeft: 25,
-    //width: "88%",
   },
   pickColor: {
     fontSize: 16,
