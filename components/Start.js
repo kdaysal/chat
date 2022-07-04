@@ -13,7 +13,9 @@ export default class Start extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground source={BgImage} resizeMode="cover" style={styles.bgImage}>
-          <Text style={styles.titleText}>~Chat it Up!~</Text>
+          <View style={styles.titleWrapper}>
+            <Text style={styles.titleText}>~Chat it Up!~</Text>
+          </View>
           <TextInput
             style={styles.inputText}
             onChangeText={(name) => this.setState({ name })}
@@ -44,13 +46,18 @@ const styles = StyleSheet.create({
   bgImage: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     width: "100%"
   },
+  titleWrapper: {
+    height: "50%",
+    width: "88%",
+    alignItems: "center",
+    paddingTop: 100,
+  },
   titleText: {
-    fontSize: 70,
+    fontSize: 50,
     color: "white",
-    height: "30%",
-    textAlign: "center",
   },
   inputText: {
     color: "white",
