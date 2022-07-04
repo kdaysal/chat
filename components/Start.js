@@ -23,8 +23,13 @@ export default class Start extends React.Component {
                 onChangeText={(name) => this.setState({ name })}
                 value={this.state.name}
                 placeholder='Enter your name ...'
-                placeholderTextColor="blue"
+                placeholderTextColor="gray"
               />
+            </View>
+            <View style={styles.pickColorWrapper}>
+              <Text style={styles.pickColor}>
+                Choose Background Color!
+              </Text>
             </View>
             <View style={styles.chatButtonWrapper}>
               <Button
@@ -77,7 +82,6 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     alignItems: "center",
     justifyContent: "center",
-
   },
   inputText: {
     fontSize: 16,
@@ -94,5 +98,15 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
   },
-
+  pickColorWrapper: {
+    marginRight: "auto",
+    paddingLeft: 25,
+    //width: "88%",
+  },
+  pickColor: {
+    fontSize: 16,
+    fontWeight: "300",
+    color: "#757083",
+    opacity: 1,
+  },
 });
