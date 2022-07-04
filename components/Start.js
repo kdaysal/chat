@@ -17,13 +17,15 @@ export default class Start extends React.Component {
             <Text style={styles.titleText}>~Chat it Up!~</Text>
           </View>
           <View style={styles.boxWrapper}>
-            <TextInput
-              style={styles.inputText}
-              onChangeText={(name) => this.setState({ name })}
-              value={this.state.name}
-              placeholder='Enter your name ...'
-              placeholderTextColor="azure"
-            />
+            <View style={styles.nameBox}>
+              <TextInput
+                style={styles.inputText}
+                onChangeText={(name) => this.setState({ name })}
+                value={this.state.name}
+                placeholder='Enter your name ...'
+                placeholderTextColor="blue"
+              />
+            </View>
             <Button
               style={styles.chatButton}
               title="Go to Chat"
@@ -51,12 +53,13 @@ const styles = StyleSheet.create({
   },
   titleWrapper: {
     width: "88%",
-    height: "45%",
+    height: "44%",
     alignItems: "center",
   },
   titleText: {
-    fontSize: 50,
-    color: "white",
+    fontSize: 45,
+    color: "#FFFFFF",
+    fontWeight: "600"
   },
   boxWrapper: {
     alignItems: "center",
@@ -65,24 +68,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     backgroundColor: "white"
   },
-  inputText: {
-    color: "white",
-    fontSize: 25,
-    fontWeight: "bold",
-    textAlign: "center",
+  nameBox: {
+    width: "88%",
+    height: 70,
+    borderWidth: 3,
+    borderColor: "grey",
+    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000000c0",
-    marginLeft: "20%",
-    marginRight: "20%",
-    marginBottom: 15,
-    borderWidth: 1,
-    borderRadius: 1,
-    borderColor: "yellow",
-    padding: 2
-  },
 
-  chatButton: {
-    marginLeft: "20%",
-    marginRight: "20%",
+  },
+  inputText: {
+    fontSize: 16,
+    fontWeight: "300",
+    opacity: 0.5,
+    color: "#757083"
   }
 });
