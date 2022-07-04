@@ -16,21 +16,23 @@ export default class Start extends React.Component {
           <View style={styles.titleWrapper}>
             <Text style={styles.titleText}>~Chat it Up!~</Text>
           </View>
-          <TextInput
-            style={styles.inputText}
-            onChangeText={(name) => this.setState({ name })}
-            value={this.state.name}
-            placeholder='Enter your name ...'
-            placeholderTextColor="azure"
-          />
-          <Button
-            style={styles.chatButton}
-            title="Go to Chat"
-            onPress={() => this.props.navigation.navigate('Chat', {
-              name: this.state.name
-            }
-            )}
-          />
+          <View style={styles.boxWrapper}>
+            <TextInput
+              style={styles.inputText}
+              onChangeText={(name) => this.setState({ name })}
+              value={this.state.name}
+              placeholder='Enter your name ...'
+              placeholderTextColor="azure"
+            />
+            <Button
+              style={styles.chatButton}
+              title="Go to Chat"
+              onPress={() => this.props.navigation.navigate('Chat', {
+                name: this.state.name
+              }
+              )}
+            />
+          </View>
         </ImageBackground>
       </View>
     )
@@ -55,6 +57,13 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 50,
     color: "white",
+  },
+  boxWrapper: {
+    alignItems: "center",
+    width: "88%",
+    height: "44%",
+    justifyContent: "space-around",
+    backgroundColor: "white"
   },
   inputText: {
     color: "white",
