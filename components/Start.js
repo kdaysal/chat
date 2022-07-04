@@ -6,6 +6,7 @@ import BgImage from "../assets/background-image.png";
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
+    //initialize states to null (or any color from the colorPalette list)
     this.state = {
       name: '',
       backgroundColor: this.colors.color1
@@ -35,6 +36,7 @@ export default class Start extends React.Component {
           <View style={styles.titleWrapper}>
             <Text style={styles.titleText}>~Chat it Up!~</Text>
           </View>
+          {/* boxWrapper will contain all elements from 'Enter your name' input box down to 'Start Chatting' button */}
           <View style={styles.boxWrapper}>
             <View style={styles.nameBox}>
               <TextInput
@@ -72,6 +74,7 @@ export default class Start extends React.Component {
               ></TouchableOpacity>
             </View>
             <View style={styles.chatButtonWrapper}>
+              {/* Button to redirect user to the Chat page. Also accepts the user-selected background color as props */}
               <Button
                 color="#FFFFFF"
                 title="Start Chatting..."
