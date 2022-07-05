@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat'
 
 // The application’s main Chat component that renders the chat UI
 export default class Chat extends React.Component {
@@ -15,7 +16,6 @@ export default class Chat extends React.Component {
     //Extract the user's name from the Start page
     let name = this.props.route.params.name;
     this.setState({ name: name })
-
 
     //Sets the page title to the user's name
     this.props.navigation.setOptions({ title: name });
