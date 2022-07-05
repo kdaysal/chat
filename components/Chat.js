@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat'
+import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'; //KeyboardAvoidingView is a React Native component used to fix the issue of Android keyboard hiding the message input field
+import { GiftedChat } from 'react-native-gifted-chat';
 
 // The application’s main Chat component that renders the chat UI
 export default class Chat extends React.Component {
@@ -8,17 +8,37 @@ export default class Chat extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: ""
+      messages: [],
     }
-  };
+  }
 
   componentDidMount() {
     //Extract the user's name from the Start page
     let name = this.props.route.params.name;
-    this.setState({ name: name })
 
     //Sets the page title to the user's name
     this.props.navigation.setOptions({ title: name });
+
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: 'Hello developer',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://placeimg.com/140/140/any',
+          },
+        },
+      ],
+    })
+  }// end componentDidMount
+
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }))
   }
 
   render() {
@@ -29,7 +49,15 @@ export default class Chat extends React.Component {
 
     return (
       <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
-        <Text>Hi {this.state.name}, let's chat!</Text>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+        {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
+        }
       </View>
     );
   }
@@ -39,7 +67,7 @@ const styles = StyleSheet.create({
   chatView: {
     //backgroundColor: "red",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // justifyContent: 'center',
+    // alignItems: 'center'
   }
 })
