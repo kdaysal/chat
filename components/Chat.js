@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'; //KeyboardAvoidingView is a React Native component used to fix the issue of Android keyboard hiding the message input field
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 
 // The application’s main Chat component that renders the chat UI
 export default class Chat extends React.Component {
@@ -33,7 +33,7 @@ export default class Chat extends React.Component {
         },
         {
           _id: 2,
-          text: 'This is a system message',
+          text: "Hi " + name + ", you've entered the chat!",
           createdAt: new Date(),
           system: true,
         },
@@ -47,6 +47,24 @@ export default class Chat extends React.Component {
     }))
   }
 
+  //this will let me change the background color of the left (receiving) or right (sending) text bubble
+  renderBubble(props) {
+    let senderBubbleColor = '#000';
+    if (this.props.route.params.selectedBackgroundColor === '#090C08') {
+      senderBubbleColor = '#abc497'
+    }
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: senderBubbleColor
+          }
+        }}
+      />
+    )
+  }
+
   render() {
 
     //Set backgroundColor on Chat page to what the user selected on the Start page
@@ -56,6 +74,7 @@ export default class Chat extends React.Component {
     return (
       <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
         <GiftedChat
+          renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={{
