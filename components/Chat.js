@@ -23,7 +23,7 @@ export default class Chat extends React.Component {
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: "Hello " + name + "!",
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -41,6 +41,7 @@ export default class Chat extends React.Component {
     })
   }// end componentDidMount
 
+  // this feeds the GiftedChat component messages from the state object
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
@@ -49,6 +50,8 @@ export default class Chat extends React.Component {
 
   //this will let me change the background color of the left (receiving) or right (sending) text bubble
   renderBubble(props) {
+    // If the user has selected the "almost entirely black" background, I want the sender's bubble background to be a lighter color for contrast
+    // otherwise, set the sender's bubble  color to black.
     let senderBubbleColor = '#000';
     if (this.props.route.params.selectedBackgroundColor === '#090C08') {
       senderBubbleColor = '#abc497'
