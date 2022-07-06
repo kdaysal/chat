@@ -45,6 +45,9 @@ export default class Start extends React.Component {
                 value={this.state.name}
                 placeholder='Enter your name ...'
                 placeholderTextColor="gray"
+                accessible={true}
+                accessibilityLabel="This is your name"
+                accessibilityHint="Enter the name you wish to use for your chat session."
               />
             </View>
             <View style={styles.pickColorWrapper}>
@@ -59,18 +62,34 @@ export default class Start extends React.Component {
               <TouchableOpacity
                 style={styles.color1}
                 onPress={() => this.changeBackgroundColor(this.colors.color1)}
+                accessible={true}
+                accessibilityLabel="Dark (almost entirely black) background color"
+                accessibilityHint="This will make the background color of your chat screen very dark (almost entirely black)."
+                accessibilityRole="button"
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color2}
                 onPress={() => this.changeBackgroundColor(this.colors.color2)}
+                accessible={true}
+                accessibilityLabel="Dark shade of violet background color"
+                accessibilityHint="This will make the background color of your chat screen a dark shade of violet."
+                accessibilityRole="button"
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color3}
                 onPress={() => this.changeBackgroundColor(this.colors.color3)}
+                accessible={true}
+                accessibilityLabel="Light shade of gray background color"
+                accessibilityHint="This will make the background color of your chat screen a light shade of gray."
+                accessibilityRole="button"
               ></TouchableOpacity>
               <TouchableOpacity
                 style={styles.color4}
                 onPress={() => this.changeBackgroundColor(this.colors.color4)}
+                accessible={true}
+                accessibilityLabel="Light shade of green, close to olive"
+                accessibilityHint="This will make the background color of your chat screen a light shade of green, close to olive."
+                accessibilityRole="button"
               ></TouchableOpacity>
             </View>
             <View style={styles.chatButtonWrapper}>
