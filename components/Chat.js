@@ -19,13 +19,13 @@ export default class Chat extends React.Component {
 
     //set up Firebase configs for MyChatAppKD app
     const firebaseConfig = {
-      apiKey: "AIzaSyBqO6JAtUiTOXRUGPKWgGSafZR8QfE1xUQ",
-      authDomain: "chatapp-2fa1d.firebaseapp.com",
-      projectId: "chatapp-2fa1d",
-      storageBucket: "chatapp-2fa1d.appspot.com",
-      messagingSenderId: "865030662295",
-      appId: "1:865030662295:web:0fa12380f094097f74e1d2",
-      measurementId: "G-2F60NT0H40"
+      apiKey: "AIzaSyAAJUbiS1ji7yp7B8J5736MMk2QbndJRWA",
+      authDomain: "mychatapp-9f87d.firebaseapp.com",
+      projectId: "mychatapp-9f87d",
+      storageBucket: "mychatapp-9f87d.appspot.com",
+      messagingSenderId: "986516990853",
+      appId: "1:986516990853:web:33fe4e86ab153227af32ec",
+      measurementId: "G-7VELSNFLZZ"
     };
 
     //initialize the Firebase app
