@@ -93,7 +93,19 @@ export default class Chat extends React.Component {
     });
   }
 
+  // Add new messages to the Firestore database collection
+  addMessages = (message) => {
+    this.referenceChatMessages.add({
+      //uid: this.state.uid, - will be implemented later
+      _id: message._id,
+      text: message.text,
+      createdAt: message.createdAt,
+      user: message.user,
+    });
+  };
+
   // this feeds the GiftedChat component messages from the state object
+  // TODO - add a call to addMessages so that the new message gets added to the "messages" collection whenever the user sends a new message (task #4.3)
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
@@ -151,3 +163,4 @@ const styles = StyleSheet.create({
     // alignItems: 'center'
   }
 })
+
