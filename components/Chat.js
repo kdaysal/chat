@@ -44,6 +44,10 @@ export default class Chat extends React.Component {
     //Sets the page title to the user's name
     this.props.navigation.setOptions({ title: name });
 
+    //create a reference for Firebase to fetch the 'messages' collection after the component has mounted
+    //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
+    this.referenceChatMessages = firebase.firestore().collection("messages");
+
     this.setState({
       messages: [
         {
@@ -64,63 +68,85 @@ export default class Chat extends React.Component {
         },
       ],
     })
+
+    //stop receiving updates about the 'messages' collection
+    this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
   }// end componentDidMount
 
-  // this feeds the GiftedChat component messages from the state object
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
-  //this will let me change the background color of the left (receiving) or right (sending) text bubble
-  renderBubble(props) {
-    // If the user has selected the "almost entirely black" background, I want the sender's bubble background to be a lighter color for contrast
-    // otherwise, set the sender's bubble  color to black.
-    let senderBubbleColor = '#000';
-    if (this.props.route.params.selectedBackgroundColor === '#090C08') {
-      senderBubbleColor = '#abc497'
+  //whenever something changes in the "messages" collection, retrieve the current data in the collection and store it in my state lists
+  onCollectionUpdate = (querySnapshot) => {
+    const messages = [];
+    // go through each document
+    querySnapshot.forEach((doc) => {
+      // get the QueryDocumentSnapshot's data
+      let data = doc.data();
+      messages.push({
+        _id: data._id,
+        text: data.text,
+        createdAt: data.createdAt.toDate(),
+        user: data.user,
+      });
+    });
+
+    // this feeds the GiftedChat component messages from the state object
+    onSend(messages = []) {
+      this.setState(previousState => ({
+        messages: GiftedChat.append(previousState.messages, messages),
+      }))
     }
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: {
-            backgroundColor: senderBubbleColor
-          }
-        }}
-      />
-    )
-  }
 
-  render() {
-
-    //Set backgroundColor on Chat page to what the user selected on the Start page
-    const selectedBackgroundColor = this.props.route.params.selectedBackgroundColor;
-
-
-    return (
-      <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
-        <GiftedChat
-          renderBubble={this.renderBubble.bind(this)}
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: 1,
+    //this will let me change the background color of the left (receiving) or right (sending) text bubble
+    renderBubble(props) {
+      // If the user has selected the "almost entirely black" background, I want the sender's bubble background to be a lighter color for contrast
+      // otherwise, set the sender's bubble  color to black.
+      let senderBubbleColor = '#000';
+      if (this.props.route.params.selectedBackgroundColor === '#090C08') {
+        senderBubbleColor = '#abc497'
+      }
+      return (
+        <Bubble
+          {...props}
+          wrapperStyle={{
+            right: {
+              backgroundColor: senderBubbleColor
+            }
           }}
         />
-        {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
-        }
-      </View>
-    );
-  }
-}
+      )
+    }
 
-const styles = StyleSheet.create({
-  chatView: {
-    //backgroundColor: "red",
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
+    render() {
+
+      //Set backgroundColor on Chat page to what the user selected on the Start page
+      const selectedBackgroundColor = this.props.route.params.selectedBackgroundColor;
+
+
+      return (
+        <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
+          <GiftedChat
+            renderBubble={this.renderBubble.bind(this)}
+            messages={this.state.messages}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: 1,
+            }}
+          />
+          {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
+          }
+        </View>
+      );
+    }
   }
-})
+
+  const styles = StyleSheet.create({
+    chatView: {
+      //backgroundColor: "red",
+      flex: 1,
+      // justifyContent: 'center',
+      // alignItems: 'center'
+    }
+  })
