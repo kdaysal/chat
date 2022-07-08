@@ -11,9 +11,10 @@ export default class Chat extends React.Component {
 
   constructor() {
     super();
-    //initialize state of messages to a blank array
+    //initialize state of messages and uid to blank/0
     this.state = {
       messages: [],
+      uid: 0
     }
 
     //set up Firebase configs for MyChatAppKD app
@@ -32,7 +33,7 @@ export default class Chat extends React.Component {
       firebase.initializeApp(firebaseConfig);
     }
 
-    //create a reference for my Firstore collection. This will store and retrieve the chat messages that users send
+    //create a reference for my Firstore "messages" collection. This will store and retrieve the chat messages that users send
     this.referenceChatMessages = firebase.firestore().collection("messages");
 
   }//end constructor
@@ -48,26 +49,19 @@ export default class Chat extends React.Component {
     //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
     this.referenceChatMessages = firebase.firestore().collection("messages");
 
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: "Hello " + name + "!",
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-        {
-          _id: 2,
-          text: "Hi " + name + ", you've entered the chat!",
-          createdAt: new Date(),
-          system: true,
-        },
-      ],
-    })
+    //create user authentication (as signInAnonymously)
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        firebase.auth().signInAnonymously();
+      }
+      this.setState({
+        uid: user.uid,
+        messages: [],
+      });
+      this.unsubscribe = this.referenceChatMessages
+        .orderBy("createdAt", "desc")
+        .onSnapshot(this.onCollectionUpdate);
+    });
 
     //stop receiving updates about the 'messages' collection
     this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
@@ -94,9 +88,10 @@ export default class Chat extends React.Component {
   }
 
   // Add new messages to the Firestore database collection
+  // 'uid' will give log the user in with a new unique user ID every time they open up the app
   addMessages = (message) => {
     this.referenceChatMessages.add({
-      //uid: this.state.uid, - will be implemented later
+      uid: this.state.uid,
       _id: message._id,
       text: message.text,
       createdAt: message.createdAt,
@@ -109,7 +104,9 @@ export default class Chat extends React.Component {
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
-    }))
+    }), () => {
+      this.addMessages(this.state.messages[0]); //pass the most recent message that was sent to the addMessages function. Most recent message will be the first element of the 'messages' array (i.e. index 0)
+    });
   }
 
   //this will let me change the background color of the left (receiving) or right (sending) text bubble
