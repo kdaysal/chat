@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'; //KeyboardAvoidingView is a React Native component used to fix the issue of Android keyboard hiding the message input field
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 
+//using firebase for my database (RTA)
+const firebase = require('firebase');
+require('firebase/firestore');
+
 // The application’s main Chat component that renders the chat UI
 export default class Chat extends React.Component {
 
