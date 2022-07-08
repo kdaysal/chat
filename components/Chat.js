@@ -11,7 +11,7 @@ export default class Chat extends React.Component {
 
   constructor() {
     super();
-    //initialize state of messages and uid to blank/0
+    //initialize state of messages, uid, and user object to blank/empty values
     this.state = {
       messages: [],
       uid: 0,
@@ -90,8 +90,15 @@ export default class Chat extends React.Component {
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
-        user: data.user,
+        user: {
+          _id: data.user._id,
+          name: data.user.name
+        }
       });
+    })
+    //now update the state of 'messages'
+    this.setState({
+      messages,
     });
   }
 
@@ -138,10 +145,10 @@ export default class Chat extends React.Component {
   }
 
   render() {
-
     //Set backgroundColor on Chat page to what the user selected on the Start page
     const selectedBackgroundColor = this.props.route.params.selectedBackgroundColor;
 
+    let { name } = this.props.route.params;
 
     return (
       <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
@@ -150,7 +157,7 @@ export default class Chat extends React.Component {
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={{
-            _id: 1,
+            _id: this.state.user._id, name
           }}
         />
         {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
