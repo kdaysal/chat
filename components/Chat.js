@@ -14,7 +14,11 @@ export default class Chat extends React.Component {
     //initialize state of messages and uid to blank/0
     this.state = {
       messages: [],
-      uid: 0
+      uid: 0,
+      user: {
+        _id: '',
+        name: '',
+      },
     }
 
     //set up Firebase configs for MyChatAppKD app
