@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'; //KeyboardAvoidingView is a React Native component used to fix the issue of Android keyboard hiding the message input field
-import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { GiftedChat, InputToolbar, Bubble } from 'react-native-gifted-chat';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -21,6 +21,7 @@ export default class Chat extends React.Component {
         _id: '',
         name: '',
       },
+      isConnected: false //represents whether the user is online
     }
 
     //set up Firebase configs for MyChatAppKD app
@@ -58,7 +59,7 @@ export default class Chat extends React.Component {
   };
 
   componentDidMount() {
-    this.getMessages();
+
 
     //Extract the user's name from the Start page
     let name = this.props.route.params.name;
@@ -66,31 +67,46 @@ export default class Chat extends React.Component {
     //Sets the page title to the user's name
     this.props.navigation.setOptions({ title: name });
 
-    // //create a reference for Firebase to fetch the 'messages' collection after the component has mounted
-    // //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
-    // this.referenceChatMessages = firebase.firestore().collection("messages");
+    //create a reference for Firebase to fetch the 'messages' collection after the component has mounted
+    //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
+    this.referenceChatMessages = firebase.firestore().collection("messages");
 
-    // //create user authentication (as signInAnonymously)
-    // this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
-    //   if (!user) {
-    //     firebase.auth().signInAnonymously();
-    //   }
-    //   this.setState({
-    //     uid: user.uid,
-    //     messages: [],
-    //     user: {
-    //       _id: user.uid,
-    //       name: name,
-    //     }
-    //   });
-    //   this.unsubscribe = this.referenceChatMessages
-    //     .orderBy("createdAt", "desc")
-    //     .onSnapshot(this.onCollectionUpdate);
-    // });
+    NetInfo.fetch().then(connection => {
+      if (connection.isConnected) {
+        console.log('online');
+        this.setState({ isConnected: true });
+      } else {
+        console.log('offline');
+      }
+    });
 
-    // //stop receiving updates about the 'messages' collection
-    // this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
 
+    //create user authentication (as signInAnonymously)
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        firebase.auth().signInAnonymously();
+      }
+      this.setState({
+        uid: user.uid,
+        messages: [],
+        user: {
+          _id: user.uid,
+          name: name,
+        }
+      });
+      this.unsubscribe = this.referenceChatMessages
+        .orderBy("createdAt", "desc")
+        .onSnapshot(this.onCollectionUpdate);
+    });
+
+    //stop receiving updates about the 'messages' collection
+    this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
+
+
+    //if user is not online, retrieve messages from AsyncStorage
+    if (!this.state.isConnected) {
+      this.getMessages();
+    }
 
   }// end componentDidMount
 
@@ -152,6 +168,7 @@ export default class Chat extends React.Component {
       messages: GiftedChat.append(previousState.messages, messages),
     }), () => {
       this.saveMessages();
+      this.addMessages(this.state.messages[0]);//add the last message, which is the first element of the messages array
     });
   }
 
@@ -184,6 +201,18 @@ export default class Chat extends React.Component {
     )
   }
 
+  //this will only render the default InputToolbar if the user is online
+  renderInputToolbar(props) {
+    if (this.state.isConnected == false) {
+    } else {
+      return (
+        <InputToolbar
+          {...props}
+        />
+      );
+    }
+  }
+
   render() {
     //Set backgroundColor on Chat page to what the user selected on the Start page
     const selectedBackgroundColor = this.props.route.params.selectedBackgroundColor;
@@ -196,6 +225,7 @@ export default class Chat extends React.Component {
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
+          renderInputToolbar={this.renderInputToolbar.bind(this)}
           user={{
             _id: this.state.user._id, name
           }}
@@ -209,10 +239,8 @@ export default class Chat extends React.Component {
 
 const styles = StyleSheet.create({
   chatView: {
-    //backgroundColor: "red",
+    //backgroundColor: "red", //for testing only
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
   }
 })
 
