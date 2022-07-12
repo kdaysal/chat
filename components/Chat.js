@@ -60,7 +60,6 @@ export default class Chat extends React.Component {
 
   componentDidMount() {
 
-
     //Extract the user's name from the Start page
     let name = this.props.route.params.name;
 
@@ -79,7 +78,6 @@ export default class Chat extends React.Component {
         console.log('offline');
       }
     });
-
 
     //create user authentication (as signInAnonymously)
     this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -101,7 +99,6 @@ export default class Chat extends React.Component {
 
     //stop receiving updates about the 'messages' collection
     this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
-
 
     //if user is not online, retrieve messages from AsyncStorage
     if (!this.state.isConnected) {
@@ -138,7 +135,7 @@ export default class Chat extends React.Component {
   }
 
   // Add new messages to the Firestore database collection
-  // 'uid' will give log the user in with a new unique user ID every time they open up the app
+  // 'uid' will log the user in with a new unique user ID every time they open up the app
   addMessages = (message) => {
     this.referenceChatMessages.add({
       uid: this.state.uid,
