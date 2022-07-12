@@ -43,37 +43,54 @@ export default class Chat extends React.Component {
 
   }//end constructor
 
+  //get any messages that are currently stored in AsyncStorage
+  async getMessages() {
+    let messages = '';
+    try {
+      messages = await AsyncStorage.getItem('messages') || [];
+      this.setState({
+        messages: JSON.parse(messages)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   componentDidMount() {
+    this.getMessages();
+
     //Extract the user's name from the Start page
     let name = this.props.route.params.name;
 
     //Sets the page title to the user's name
     this.props.navigation.setOptions({ title: name });
 
-    //create a reference for Firebase to fetch the 'messages' collection after the component has mounted
-    //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
-    this.referenceChatMessages = firebase.firestore().collection("messages");
+    // //create a reference for Firebase to fetch the 'messages' collection after the component has mounted
+    // //TODO - add 'if' logic to check whether "messages" collection is null/undefined before executing the line below
+    // this.referenceChatMessages = firebase.firestore().collection("messages");
 
-    //create user authentication (as signInAnonymously)
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        firebase.auth().signInAnonymously();
-      }
-      this.setState({
-        uid: user.uid,
-        messages: [],
-        user: {
-          _id: user.uid,
-          name: name,
-        }
-      });
-      this.unsubscribe = this.referenceChatMessages
-        .orderBy("createdAt", "desc")
-        .onSnapshot(this.onCollectionUpdate);
-    });
+    // //create user authentication (as signInAnonymously)
+    // this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    //   if (!user) {
+    //     firebase.auth().signInAnonymously();
+    //   }
+    //   this.setState({
+    //     uid: user.uid,
+    //     messages: [],
+    //     user: {
+    //       _id: user.uid,
+    //       name: name,
+    //     }
+    //   });
+    //   this.unsubscribe = this.referenceChatMessages
+    //     .orderBy("createdAt", "desc")
+    //     .onSnapshot(this.onCollectionUpdate);
+    // });
 
-    //stop receiving updates about the 'messages' collection
-    this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
+    // //stop receiving updates about the 'messages' collection
+    // this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
+
+
   }// end componentDidMount
 
   componentWillUnmount() {
@@ -115,14 +132,35 @@ export default class Chat extends React.Component {
     });
   };
 
+  //delete any test messages that I created
+  async deleteMessages() {
+    try {
+      await AsyncStorage.removeItem('messages');
+      this.setState({
+        messages: []
+      })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   // this feeds the GiftedChat component messages from the state object
   // TODO - add a call to addMessages so that the new message gets added to the "messages" collection whenever the user sends a new message (task #4.3)
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }), () => {
-      this.addMessages(this.state.messages[0]); //pass the most recent message that was sent to the addMessages function. Most recent message will be the first element of the 'messages' array (i.e. index 0)
+      this.saveMessages();
     });
+  }
+
+  //save messages to AsyncStorage (locally / offline)
+  async saveMessages() {
+    try {
+      await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   //this will let me change the background color of the left (receiving) or right (sending) text bubble
