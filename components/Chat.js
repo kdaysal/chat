@@ -212,6 +212,7 @@ export default class Chat extends React.Component {
   }
 
   //this will render my CustomActions component when called
+
   renderCustomActions = (props) => {
     return <CustomActions {...props} />;
   };
@@ -226,10 +227,10 @@ export default class Chat extends React.Component {
       <View style={styles.chatView} backgroundColor={selectedBackgroundColor}>
         <GiftedChat
           renderBubble={this.renderBubble.bind(this)}
-          renderActions={this.renderCustomActions}
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
+          renderActions={this.renderCustomActions}
           user={{
             _id: this.state.user._id, name
           }}
