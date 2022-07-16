@@ -21,9 +21,12 @@ export default class Chat extends React.Component {
       user: {
         _id: '',
         name: '',
-        avatar: ''
+        avatar: '',
+        image: null
       },
-      isConnected: false //represents whether the user is online
+      isConnected: false, //represents whether the user is online
+      image: null,
+      location: null
     }
 
     //set up Firebase configs for MyChatAppKD app
@@ -129,7 +132,8 @@ export default class Chat extends React.Component {
           _id: data.user._id,
           name: data.user.name,
           avatar: data.user.avatar
-        }
+        },
+        image: data.image || null
       });
     })
     //now update the state of 'messages'
@@ -147,6 +151,7 @@ export default class Chat extends React.Component {
       text: message.text,
       createdAt: message.createdAt,
       user: message.user,
+      image: message.image || ''
     });
   };
 
