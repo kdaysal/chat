@@ -26,8 +26,51 @@ class CustomAction extends React.Component {
   };
 
   //TBD
-  imagePicker = () => {
-    console.log(`imagePicker running`)
+  imagePicker = async () => {
+    // first get permission to access user's camera roll
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    try {
+      if (status === "granted") {
+        // allow user to select an image
+        const result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images are allowed
+        }).catch((error) => console.log(error));
+        // canceled process
+        if (!result.cancelled) {
+          const imageUrl = await this.uploadImageFetch(result.uri);
+          this.props.onSend({ image: imageUrl });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  uploadImageFetch = async (uri) => {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        console.log(e);
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", uri, true);
+      xhr.send(null);
+    });
+
+    const imageNameBefore = uri.split("/");
+    const imageName = imageNameBefore[imageNameBefore.length - 1];
+
+    const ref = firebase.storage().ref().child(`images/${imageName}`);
+
+    const snapshot = await ref.put(blob);
+
+    blob.close();
+
+    return await snapshot.ref.getDownloadURL();
   };
 
   //TBD
