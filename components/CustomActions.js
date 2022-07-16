@@ -28,6 +28,7 @@ class CustomAction extends React.Component {
 
   //TBD
   imagePicker = async () => {
+    console.log(`imagePicker running`);
     // first get permission to access user's camera roll
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     try {
@@ -76,9 +77,27 @@ class CustomAction extends React.Component {
     return await snapshot.ref.getDownloadURL();
   };
 
-  //TBD
-  takePhoto = () => {
-    console.log(`takePhoto running`)
+  //Allow user to take a live photo with their phone's camera
+  takePhoto = async () => {
+    console.log(`takePhoto running`);
+    const { status } = await Permissions.askAsync(
+      Permissions.CAMERA,
+      Permissions.CAMERA_ROLL
+    );
+    try {
+      if (status === "granted") {
+        const result = await ImagePicker.launchCameraAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        }).catch((error) => console.log(error));
+
+        if (!result.cancelled) {
+          const imageUrl = await this.uploadImageFetch(result.uri);
+          this.props.onSend({ image: imageUrl });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   //TBD
@@ -108,8 +127,8 @@ class CustomAction extends React.Component {
             return;
           case 1:
             console.log(`user wants to take a photo`)
-            //  return this.takePhoto();
-            return;
+            return this.takePhoto();
+
           case 2:
             console.log(`user wants to share location`)
             return;
