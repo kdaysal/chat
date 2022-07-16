@@ -148,7 +148,7 @@ export default class Chat extends React.Component {
     this.referenceChatMessages.add({
       uid: this.state.uid,
       _id: message._id,
-      text: message.text,
+      text: message.text || null, //must be able to return null for the case when a picture is sent (but no text message)
       createdAt: message.createdAt,
       user: message.user,
       image: message.image || ''
