@@ -21,6 +21,7 @@ export default class Chat extends React.Component {
       user: {
         _id: '',
         name: '',
+        avatar: ''
       },
       isConnected: false //represents whether the user is online
     }
@@ -91,6 +92,7 @@ export default class Chat extends React.Component {
         user: {
           _id: user.uid,
           name: name,
+          avatar: 'https://placeimg.com/140/140/any'
         }
       });
       this.unsubscribe = this.referenceChatMessages
@@ -125,7 +127,8 @@ export default class Chat extends React.Component {
         createdAt: data.createdAt.toDate(),
         user: {
           _id: data.user._id,
-          name: data.user.name
+          name: data.user.name,
+          avatar: data.user.avatar
         }
       });
     })
@@ -231,8 +234,12 @@ export default class Chat extends React.Component {
           onSend={messages => this.onSend(messages)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           renderActions={this.renderCustomActions}
+          showUserAvatar={true}
+          showAvatarForEveryMessage={true}
           user={{
-            _id: this.state.user._id, name
+            _id: this.state.user._id,
+            name,
+            avatar: this.state.user.avatar
           }}
         />
         {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
