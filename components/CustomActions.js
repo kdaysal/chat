@@ -9,6 +9,7 @@ import {
 
 import firebase from 'firebase';
 import firestore from 'firebase';
+import "firebase/firestore";
 
 //import permissions, image selector, and location features (gps)
 import * as Permissions from "expo-permissions";
@@ -61,9 +62,11 @@ class CustomAction extends React.Component {
       xhr.send(null);
     });
 
+    //creating a storage reference for the image
     const imageNameBefore = uri.split("/");
     const imageName = imageNameBefore[imageNameBefore.length - 1];
 
+    //store the reference in firebase storage / 'images' folder
     const ref = firebase.storage().ref().child(`images/${imageName}`);
 
     const snapshot = await ref.put(blob);
