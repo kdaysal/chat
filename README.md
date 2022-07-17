@@ -114,7 +114,7 @@ reader so that I can engage with a chat interface.
 
 * Clone this reposity to a folder on your local machine: https://github.com/kdaysal/chat
 * In your terminal, navigate to the root folder where you saved the project files
-    * Install the Expo CLI - following the instructions in the documentation [here](https://docs.expo.dev/get-started/installation/)
+    * Install the Expo CLI globally with: `npm install --global expo-cli`. If you have any trouble, check out the documentation [here](https://docs.expo.dev/get-started/installation/)
     * Install all required dependencies by typing: `npm install` (or the equivalent yarn command)
 * Download and install the "Expo Go" app (available for free on the Apple Store)
 * To run the app, head back to your terminal and in the project root folder type `npm start` or `expo start` 
