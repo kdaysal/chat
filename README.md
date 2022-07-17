@@ -7,6 +7,8 @@ The objective here was to build a chat app for mobile devices using React Native
 
 ## Key Features
 
+<img src="https://https://github.com/kdaysal/chat/images/chat-app-1.png" width="300">
+
 * A page where users can enter their name and choose a background color for the chat screen
 before joining the chat.
 
