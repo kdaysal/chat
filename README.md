@@ -3,7 +3,7 @@
 
 ## Main Objective
 
-The objective here was to build a simple chat app for mobile devices using React Native, Expo CLI and Expo Go. This app provides users with a chat interface and options to share images, pictures, and even their location. The simplicity of a 2 page app removies complexity from navigation and allows users to focus on what matters most - chatting it up! - all while giving the developer some real-world practice in developing a native app ;)
+The objective here was to build a chat app for mobile devices using React Native, Expo CLI, Expo Go, and features from the freely available GiftedChat component. This app provides users with a chat interface and options to share images, pictures, and even their geographical location. The simplicity of a 2 page app removies complexity from navigation and allows users to focus on what matters most - chatting it up! - all while giving the intrepid developer some real-world practice in developing a native app using a completely new set of tools ;)
 
 ### How to get started
 
@@ -55,8 +55,11 @@ and location data.
 ### Technologies Used
 
     * React Native
-    * Expo
-    * ...more to come...
+    * Expo Go - for simulation/runtime environment
+    * Expo CLI - for development / running the server
+    * ImagePickerAPI
+    ** launchImageLibraryAsync - to open up the device's media library and let the user choose a file
+    ** launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
 
 ### Installation Requirements to Run
 
