@@ -19,9 +19,32 @@ and location data.
 
 ## Technologies Used
 
+* React
+    * react
+    * react-dom
 * React Native
-* Expo Go - for simulation/runtime environment
-* Expo CLI - for development / running the server
+    * react-native-async-storage/async-storage
+    * react-native-community/masked-view
+    * react-native-community/netinfo
+    * react-navigation/native
+    * react-navigation/stack
+    * react-native-gesture-handler
+    * react-native-gifted-chat
+    * react-native-maps
+    * react-native-reanimated
+    * react-native-safe-area-context
+    * react-native-screens
+    * react-native-web
+    * react-navigation
+* Expo
+    * Expo Go - for simulation/runtime environment
+    * Expo CLI - for development / running the server
+    * expo-av
+    * expo-image-picker
+    * expo-location
+    * expo-permissions
+    * expo-status-bar
+    * expo/react-native-action-sheet
 * ImagePickerAPI
     * launchImageLibraryAsync - to open up the device's media library and let the user choose a file
     * launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
@@ -75,7 +98,7 @@ reader so that I can engage with a chat interface.
 
 * The app’s codebase must contain comments.
 
-## Requirements to Run/Install
+## Requirements to Run/Install Locally
 
 * npm / Node.js (or yarn)
 * Emulator such as Xcode (iOS) or Android Studio (recommended)
@@ -96,3 +119,5 @@ reader so that I can engage with a chat interface.
 * Alternatively you can view the app using the preferred emulator of your choice - 
     * For Mac, check out [XCODE](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)
     * For Windows / Linux, check out [Android Studio](https://developer.android.com/studio)
+
+* Note - the devloper is kind enough to offer up his firestore database for your use in testing out this app (anonymous authentication is freely allowed) - but please try to keep the volume of cat pictures uploaded to < 1gb. Thank you!
