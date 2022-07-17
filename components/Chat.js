@@ -169,7 +169,6 @@ export default class Chat extends React.Component {
   }
 
   // this feeds the GiftedChat component messages from the state object
-  // TODO - add a call to addMessages so that the new message gets added to the "messages" collection whenever the user sends a new message (task #4.3)
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
@@ -276,7 +275,7 @@ export default class Chat extends React.Component {
 
 const styles = StyleSheet.create({
   chatView: {
-    //backgroundColor: "red", //for testing only
+    //backgroundColor: "red", //uncomment for testing purposes only
     flex: 1,
   }
 })

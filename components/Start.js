@@ -6,7 +6,7 @@ import BgImage from "../assets/background-image.png";
 export default class Start extends React.Component {
   constructor(props) {
     super(props);
-    //initialize states to null (or any color from the colorPalette list)
+    //initialize states to null (or any color from the colorPalette list as a starting value)
     this.state = {
       name: '',
       backgroundColor: this.colors.color1
@@ -111,6 +111,7 @@ export default class Start extends React.Component {
   }
 }
 
+//create StyleSheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

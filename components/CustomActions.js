@@ -48,6 +48,7 @@ class CustomAction extends React.Component {
     }
   };
 
+  //upload the selected image to the firestore db via blob (binary large object)
   uploadImageFetch = async (uri) => {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -77,7 +78,7 @@ class CustomAction extends React.Component {
     return await snapshot.ref.getDownloadURL();
   };
 
-  //Allow user to take a live photo with their phone's camera
+  //Allow user to take a live photo with their phone's camera - if they grant permission
   takePhoto = async () => {
     console.log(`takePhoto running`);
     const { status } = await Permissions.askAsync(
@@ -176,6 +177,7 @@ class CustomAction extends React.Component {
   }
 }
 
+//new StyleSheet to define styles for use
 const styles = StyleSheet.create({
   container: {
     width: 26,
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
   },
 });
 
+//set a contextType for actionSheet (to define it as a function)
 CustomAction.contextTypes = {
   actionSheet: PropTypes.func,
 };
