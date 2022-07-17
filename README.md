@@ -7,7 +7,7 @@ The objective here was to build a chat app for mobile devices using React Native
 
 ## Key Features
 
-<img src="https://github.com/kdaysal/chat/images/chat-app-1.png" width="300">
+<img src="https://github.com/kdaysal/chat/blob/main/images/chat-app-1.PNG" width="300">
 
 * A page where users can enter their name and choose a background color for the chat screen
 before joining the chat.
@@ -18,6 +18,8 @@ before joining the chat.
 and location data.
 
 * Data is able to be stored online and offline.
+
+<img src="https://github.com/kdaysal/chat/blob/main/images/chat-app-2.PNG" width="300">
 
 ## Technologies Used
 
