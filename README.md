@@ -101,9 +101,9 @@ reader so that I can engage with a chat interface.
 ## Requirements to Run/Install Locally
 
 * npm / Node.js (or yarn)
-* Emulator such as Xcode (iOS) or Android Studio (recommended)
-* Expo Go (alternative to emulators)
-* Expo CLI
+* Emulator such as [XCODE](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/ (iOS) or [Android Studio](https://developer.android.com/studio)
+* [Expo Go](https://expo.dev/client) (alternative to emulators)
+* [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
 ## How to Run the App
 
