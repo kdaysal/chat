@@ -58,8 +58,8 @@ reader so that I can engage with a chat interface.
 * Expo Go - for simulation/runtime environment
 * Expo CLI - for development / running the server
 * ImagePickerAPI
-    launchImageLibraryAsync - to open up the device's media library and let the user choose a file
-    launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
+    * launchImageLibraryAsync - to open up the device's media library and let the user choose a file
+    * launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
 
 ## Installation Requirements to Run
 
@@ -75,8 +75,8 @@ reader so that I can engage with a chat interface.
 
 ## How to Run the App
 
-    * Navigate to the root folder where you cloned the repo
-    * In your CLI, run 'npm start' or 'expo start' 
-    * Once Expo compiles the project it should display development options in a separate browser window. If this doesn't happen automatically, copy the localhost path from your CLI's output and paste into your browser's url bar.
-    * To view the app from a mobile device, use your device's camera (IOS) or from the Expo app itself (Android) to scan the QR Code that is displayed in your browser after Expo has compiled the project
-    * Alternatively you can view the app using the preferred emulator of your choice
+* Navigate to the root folder where you cloned the repo
+* In your CLI, run 'npm start' or 'expo start' 
+* Once Expo compiles the project it should display development options in a separate browser window. If this doesn't happen automatically, copy the localhost path from your CLI's output and paste into your browser's url bar.
+* To view the app from a mobile device, use your device's camera (IOS) or from the Expo app itself (Android) to scan the QR Code that is displayed in your browser after Expo has compiled the project
+* Alternatively you can view the app using the preferred emulator of your choice
