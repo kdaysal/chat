@@ -7,19 +7,18 @@ The objective here was to build a chat app for mobile devices using React Native
 
 ## Key Features
 
-<img src="https://github.com/kdaysal/chat/blob/main/images/chat-app-1.PNG" width="300">
-
 * A page where users can enter their name and choose a background color for the chat screen
 before joining the chat.
+<img src="https://github.com/kdaysal/chat/blob/main/images/chat-app-1.PNG" width="300">
 
 * A page displaying the conversation, as well as an input field and submit button
 
 * The chat provides users with two additional communication features: sending images
 and location data.
 
-* Data is able to be stored online and offline.
-
 <img src="https://github.com/kdaysal/chat/blob/main/images/chat-app-2.PNG" width="300">
+
+* Data is able to be stored both online and offline.
 
 ## Technologies Used
 
