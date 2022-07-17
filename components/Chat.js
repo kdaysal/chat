@@ -4,6 +4,7 @@ import { GiftedChat, InputToolbar, Bubble } from 'react-native-gifted-chat';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 import CustomActions from './CustomActions';
+import MapView from 'react-native-maps';
 
 //using firebase for my database (RTA)
 const firebase = require('firebase');
@@ -11,10 +12,9 @@ require('firebase/firestore');
 
 // The application’s main Chat component that renders the chat UI
 export default class Chat extends React.Component {
-
   constructor() {
     super();
-    //initialize state of messages, uid, and user object to blank/empty values
+    //initialize states to blank/empty values
     this.state = {
       messages: [],
       uid: 0,
@@ -25,8 +25,8 @@ export default class Chat extends React.Component {
         image: null
       },
       isConnected: false, //represents whether the user is online
-      image: null,
-      location: null
+      image: null, //a picture, either selected from the user's camera roll or taken live
+      location: null //user's geographical location
     }
 
     //set up Firebase configs for MyChatAppKD app
@@ -47,7 +47,6 @@ export default class Chat extends React.Component {
 
     //create a reference for my Firstore "messages" collection. This will store and retrieve the chat messages that users send
     this.referenceChatMessages = firebase.firestore().collection("messages");
-
   }//end constructor
 
   //get any messages that are currently stored in AsyncStorage
@@ -133,7 +132,8 @@ export default class Chat extends React.Component {
           name: data.user.name,
           avatar: data.user.avatar
         },
-        image: data.image || null
+        image: data.image || null,
+        location: data.location || null
       });
     })
     //now update the state of 'messages'
@@ -151,7 +151,8 @@ export default class Chat extends React.Component {
       text: message.text || null, //must be able to return null for the case when a picture is sent (but no text message)
       createdAt: message.createdAt,
       user: message.user,
-      image: message.image || ''
+      image: message.image || '',
+      location: message.location || null
     });
   };
 
@@ -219,8 +220,26 @@ export default class Chat extends React.Component {
     }
   }
 
-  //this will render my CustomActions component when called
+  //create a CustomView to render the user's geolocation data
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{ width: 150, height: 100, borderRadius: 13, margin: 3 }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
 
+  //this will render my CustomActions component when called
   renderCustomActions = (props) => {
     return <CustomActions {...props} />;
   };
@@ -239,6 +258,7 @@ export default class Chat extends React.Component {
           onSend={messages => this.onSend(messages)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           renderActions={this.renderCustomActions}
+          renderCustomView={this.renderCustomView}
           showUserAvatar={true}
           showAvatarForEveryMessage={true}
           user={{
