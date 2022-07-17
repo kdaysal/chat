@@ -1,9 +1,9 @@
 # Chat App!
- Chat app for mobile devices built using React Native and Expo CLI. This app will provide users with a chat interface and options to share images and their location.
+ This is a Chat app built for mobile devices and developed using React Native and Expo. This app utilizes GiftedChat to provide users with a chat interface as well as options to share images from their phones, and even their geographical location!
 
 ## Main Objective
 
-The objective here was to build a chat app for mobile devices using React Native, Expo CLI, Expo Go, and features from the freely available GiftedChat component. This app provides users with a chat interface and options to share images, pictures, and even their geographical location. The simplicity of a 2 page app removies complexity from navigation and allows users to focus on what matters most - chatting it up! - all while giving the intrepid developer some real-world practice in developing a native app using a completely new set of tools ;)
+The objective here was to build a chat app for mobile devices using React Native, Expo CLI, Expo Go, and features from the freely available GiftedChat component. The simplicity in design of a 2 page app removies complexity from navigation and allows users to focus on what matters most - chatting it up and sharing cool pics! - all while giving the intrepid developer some real-world practice in developing a native app using a completely new set of tools ;)
 
 ## Key Features
 
