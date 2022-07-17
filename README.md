@@ -5,12 +5,6 @@
 
 The objective here was to build a chat app for mobile devices using React Native, Expo CLI, Expo Go, and features from the freely available GiftedChat component. This app provides users with a chat interface and options to share images, pictures, and even their geographical location. The simplicity of a 2 page app removies complexity from navigation and allows users to focus on what matters most - chatting it up! - all while giving the intrepid developer some real-world practice in developing a native app using a completely new set of tools ;)
 
-## How to get started
-
-(While still in testing phase...) You can clone the repository here and set up a free account with Expo Go in order to view the app on your device.
-
-git clone https://github.com/kdaysal/chat
-
 ## Key Features
 
 * A page where users can enter their name and choose a background color for the chat screen
@@ -75,8 +69,15 @@ reader so that I can engage with a chat interface.
 
 ## How to Run the App
 
-* Navigate to the root folder where you cloned the repo
-* In your CLI, run 'npm start' or 'expo start' 
-* Once Expo compiles the project it should display development options in a separate browser window. If this doesn't happen automatically, copy the localhost path from your CLI's output and paste into your browser's url bar.
+* Clone this reposity to a folder on your local machine: https://github.com/kdaysal/chat
+* In your CLI of choice, navigate to the root folder where you saved the project files
+* Install the Expo CLI - following the instructions in the documentation [here](https://docs.expo.dev/get-started/installation/)
+* Install all required dependencies by typing: `npm install` (or the equivalent yarn command)
+* Download and install the "Expo Go" app (available for free on the Apple Store)
+* To run the app, in your terminal navigate to the project root folder ant type `npm start` or `expo start` 
+* Once Expo compiles the project it should display development options in a separate browser window. If this doesn't happen automatically, copy the localhost path from your CLI's output and paste into your browser's url bar to view the page.
 * To view the app from a mobile device, use your device's camera (IOS) or from the Expo app itself (Android) to scan the QR Code that is displayed in your browser after Expo has compiled the project
-* Alternatively you can view the app using the preferred emulator of your choice
+* Note - if the default 'LAN' option is not loading your app, ensure that your device is on the same network as the machine you're running command lines from. If that still fails, try switching form LAN to 'Tunnel'
+* Alternatively you can view the app using the preferred emulator of your choice - 
+    * For Mac, check out [XCODE](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/)GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html
+    * For Windows / Linux, check out [Android Studio](https://developer.android.com/studio)
