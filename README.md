@@ -17,6 +17,15 @@ and location data.
 
 * Data is able to be stored online and offline.
 
+## Technologies Used
+
+* React Native
+* Expo Go - for simulation/runtime environment
+* Expo CLI - for development / running the server
+* ImagePickerAPI
+    * launchImageLibraryAsync - to open up the device's media library and let the user choose a file
+    * launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
+
 ## User Stories
 
 * As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my
@@ -46,26 +55,32 @@ reader so that I can engage with a chat interface.
 
 * ...more requirements to be documents as development continues...
 
-## Technologies Used
+* Chat conversations must be stored in Google Firestore Database.
 
-* React Native
-* Expo Go - for simulation/runtime environment
-* Expo CLI - for development / running the server
-* ImagePickerAPI
-    * launchImageLibraryAsync - to open up the device's media library and let the user choose a file
-    * launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
+* The app must authenticate users anonymously via Google Firebase authentication.
 
-## Installation Requirements to Run
+* Chat conversations must also be stored locally.
 
-* npm / Node.js
+* The app must let users pick and send images from the phone’s image library.
+
+* The app must let users take pictures with the device’s camera app, and send them.
+
+* The app must store images in Firebase Cloud Storage.
+
+* The app must be able to read the user’s location data.
+
+* Location data must be sent via the chat in a map view.
+
+* The chat interface and functionality must be created using the Gifted Chat library.
+
+* The app’s codebase must contain comments.
+
+## Requirements to Run/Install
+
+* npm / Node.js (or yarn)
 * Emulator such as Xcode (iOS) or Android Studio (recommended)
-* Expo Go (alternatively)
-
-## Install required packages from package.json
-
-* Download this repo
-* Navigate to root folder via CLI
-* Install required packages in package.json
+* Expo Go (alternative to emulators)
+* Expo CLI
 
 ## How to Run the App
 
@@ -79,5 +94,5 @@ reader so that I can engage with a chat interface.
 * To view the app from a mobile device, use your device's camera (IOS) or from the Expo app itself (Android) to scan the QR Code that is displayed in your browser after Expo has compiled the project
 * Note - if the default 'LAN' option is not loading your app, ensure that your device is on the same network as the machine you're running command lines from. If that still fails, try switching form LAN to 'Tunnel'
 * Alternatively you can view the app using the preferred emulator of your choice - 
-    * For Mac, check out [XCODE](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/)GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html
+    * For Mac, check out [XCODE](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)
     * For Windows / Linux, check out [Android Studio](https://developer.android.com/studio)
