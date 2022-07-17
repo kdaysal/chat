@@ -100,9 +100,28 @@ class CustomAction extends React.Component {
     }
   };
 
-  //TBD
-  getLocation = () => {
-    console.log(`getLocation running`)
+  //Send user's geolocation in the chat (after receiving permission, of course)
+  getLocation = async () => {
+    try {
+      const { status } = await Permissions.askAsync(Permissions.LOCATION);
+      if (status === "granted") {
+        const result = await Location.getCurrentPositionAsync(
+          {}
+        ).catch((error) => console.log(error));
+        const longitude = JSON.stringify(result.coords.longitude);
+        const altitude = JSON.stringify(result.coords.latitude);
+        if (result) {
+          this.props.onSend({
+            location: {
+              longitude: result.coords.longitude,
+              latitude: result.coords.latitude,
+            },
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   // Create 4 options for the user to choose via showActionSheetWithOptions()
@@ -131,8 +150,7 @@ class CustomAction extends React.Component {
 
           case 2:
             console.log(`user wants to share location`)
-            return;
-          // return this.getLocation();
+            return this.getLocation();
 
           default:
             console.log(`user wants to cancel!`);
