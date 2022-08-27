@@ -53,6 +53,7 @@ and location data.
 * ImagePickerAPI
     * launchImageLibraryAsync - to open up the device's media library and let the user choose a file
     * launchCameraAsync - to open up the device's camera and allow the user to take a photo (in realtime)
+* [Google Firebase / Cloud Firestore](https://firebase.google.com/) - Online database
 
 ## User Stories
 
